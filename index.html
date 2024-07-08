@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Pemesanan Undangan Percetakan</title>
+  <style>
+    body {
+      font-family: 'Times New Roman', Times, serif, sans-serif;
+      background-image: url(/bg01.jpg);
+      background-color: #c5c1c1;
+    }
+
+    .container {
+      width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #4CAF50;
+      border-radius: 8px;
+      backdrop-filter: blur(10px) ;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #000;
+    }
+
+    label {
+      display: block;
+      color: #000;
+      font-size: 18px;
+      margin-bottom: 5px;
+      border-radius: 8px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #4CAF50;
+      border-radius: 8px;
+      box-sizing: border-box;
+      box-shadow: 1px #000;
+    }
+
+    select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    /* CSS Responsive */
+@media (max-width: 480px) {
+  /* Layout untuk Layar Kecil (Ponsel) */
+  .form-group {
+    flex-direction: column;
+  }
+
+  label {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+
+  input,
+  textarea,
+  select {
+    margin-bottom: 10px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  /* Layout untuk Layar Sedang (Tablet Kecil) */
+  .form-group {
+    flex-direction: row;
+  }
+
+  label {
+    width: 30%;
+    margin-right: 10px;
+  }
+
+  input,
+  textarea,
+  select {
+    flex: 1;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Layout untuk Layar Besar (Tablet Besar) */
+  .form-group {
+    flex-direction: row;
+  }
+
+  label {
+    width: 25%;
+    margin-right: 10px;
+  }
+
+  input,
+  textarea,
+  select {
+    flex: 1;
+  }
+}
+
+@media (min-width: 1025px) {
+  /* Layout untuk Desktop */
+  .form-group {
+    flex-direction: row;
+  }
+
+  label {
+    width: 20%;
+    margin-right: 10px;
+  }
+
+  input,
+  textarea,
+  select {
+    flex: 1;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Form Pemesanan Undangan</h2>
+
+    <form id="orderForm">
+      <label for="nama">Nama Tuan Rumah:</label>
+      <input type="text" id="nama" name="nama" required>
+
+      <label for="alamatLengkap">Alamat Lengkap:</label>
+      <input type="text" id="alamatLengkap" name="alamatLengkap" required>
+
+      <label for="jenisUndangan">Jenis Undangan:</label>
+      <select id="jenisUndangan" name="jenisUndangan" required>
+        <option value="">Pilih Jenis Undangan</option>
+        <option value="pernikahan">Pernikahan</option>
+        <option value="tahlil">Tahlil</option>
+        <option value="genduri">Genduri</option>
+        <option value="dzikirFida">Dzikir Fida'</option>
+        <option value="walimatulUrsy">Walimatul Ursy</option>
+        <option value="walimatulAqiqoh">Walimatul Aqiqoh</option>
+        <option value="megengan">Megengan</option>
+        <option value="khitanan">Khitanan</option>
+        <option value="ulangTahun">Ulang Tahun</option>
+        </select>
+
+      <label for="jumlahUndangan">Jumlah Undangan:</label>
+      <input type="number" id="jumlahUndangan" name="jumlahUndangan" min="1" required>
+
+      <label for="deskripsi">Deskripsi (Opsional):</label>
+      <textarea id="deskripsi" name="deskripsi"></textarea>
+
+      <button type="button" onclick="buatPesananWhatsApp()">Pesan via WhatsApp</button>
+    </form>
+  </div>
+
+  <script>
+    function buatPesananWhatsApp() {
+      const nama = document.getElementById('nama').value;
+      const alamatLengkap = document.getElementById('alamatLengkap').value;
+      const jenisUndangan = document.getElementById('jenisUndangan').value;
+      const jumlahUndangan = document.getElementById('jumlahUndangan').value;
+      const deskripsi = document.getElementById('deskripsi').value;
+
+      const pesanWhatsApp = `*Pesan Undangan*\n\n` +
+        `Nama: ${nama}\n` +
+        `Alamat Lengkap: ${alamatLengkap}\n` +
+        `Jenis Undangan: ${jenisUndangan}\n` +
+        `Jumlah Undangan: ${jumlahUndangan}\n` +
+        `Deskripsi: ${deskripsi}\n\n` +
+        `Kirim pesan ini untuk konfirmasi pemesanan.`;
+
+      const whatsappURL = `https://wa.me/` + 085853260316 + `?text=` + encodeURIComponent(pesanWhatsApp);
+
+      window.open(whatsappURL, '_blank');
+    }
+  </script>
+</body>
+</html>
